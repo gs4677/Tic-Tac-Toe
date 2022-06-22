@@ -1,0 +1,153 @@
+#include<stdio.h>
+#include<stdlib.h>
+Int i,j,a,b,player,pos,cnt;
+Char arr[9][11],ch;
+Void print();
+Void game();
+Void convert(int);
+Void enter(int,int);
+Void test();
+Void check();
+Int main()
+{
+    Printf(“Player one please enter your symbol X or O \t”);
+    Scanf(“%c”,&ch);
+    If(ch==’X’ || ch==’x’)
+        {
+            Cnt=0;
+            Player=1;
+        }
+    Else if (ch==’O’ || ch==’o’)
+        {
+            Cnt=1;
+            Player =1;
+        }
+    Else
+    {
+        Printf(“You have not entered proper symbol\nSo, I had given X to the player one\n”);
+        Cnt=0;
+        Player = 1;
+    }
+    Printf(“You need to enter the position \n”);
+    Printf(“your positions are\n1\t2\t3\n4\t5\t6\n7\t8\t9\n”);
+    For(i=0;i<9;i++)
+    {
+     For(j=0;j<11;j++)
+     {
+          If((i==2||i==5)&&(j!=3 && j!=7))
+            Arr[i][j]=’_’;
+          Else if(j==3 || j==7)
+            Arr[i][j]=’|’;
+          Else
+            Arr[i][j]=’ ‘;
+     }
+    }
+    Game();
+}
+Void game()
+{
+    Print();
+    If(player==1)
+    {
+        Printf(“\nplayer one turn\n Enter your position \t”);
+        Player++;
+    }
+    Else
+    {
+        Printf(“\nplayer two turn\n Enter your position \t”);
+        Player--;
+    }
+    Scanf(“%d”,&pos);
+    If(pos<1||pos>9)
+     {
+         Printf(“No position found \n”);
+         Game();
+     }
+     Convert(pos);
+     Enter(a,b);
+     Test();
+}
+Void print()
+{
+    For(i=0;i<9;i++)
+    {
+        For(j=0;j<11;j++)
+            Printf(“%c”,arr[i][j]);
+            Printf(“\n”);
+    }
+}
+Void convert(int pos)
+{
+    Switch(pos)
+    {
+      Case 1: a=1,b=1;
+                Break;
+      Case 2: a=1,b=5;
+                Break;
+      Case 3: a=1,b=9;
+                Break;
+      Case 4: a=4,b=1;
+                Break;
+      Case 5: a=4,b=5;
+                Break;
+      Case 6: a=4,b=9;
+                Break;
+      Case 7: a=7,b=1;
+                Break;
+      Case 8: a=7,b=5;
+                Break;
+      Case 9: a=7,b=9;
+                Break;
+    }
+}
+Void enter(int a,int b)
+{
+    If(arr[a][b]==’|’||arr[a][b]==’_’||arr[a][b]==’ ‘)
+    {
+        If(cnt%2==0)
+            {
+                Arr[a][b]=’X’;
+                Cnt++;
+            }
+        Else
+           {
+                Arr[a][b]=’O’;
+                Cnt++;
+           }
+    }
+    Else
+    {
+        Printf(“Sorry position is occupied\n”);
+        If(player==2)
+            Player=1;
+        If(player==1)
+            Player=2;
+        Game();
+    }
+}
+Void test()
+{
+    If((arr[1][1]==’X’ && arr[1][5]==’X’ && arr[1][9]==’X’ )||(arr[4][1]==’X’ && arr[4][5]==’X’ && arr[4][9]==’X’ )||(arr[7][1]==’X’ && arr[7][5]==’X’ && arr[7][9]==’X’ )||(arr[1][1]==’X’ && arr[4][1]==’X’ && arr[7][1]==’X’ )||(arr[1][5]==’X’ && arr[4][5]==’X’ && arr[7][5]==’X’ )||(arr[1][9]==’X’ && arr[4][9]==’X’ && arr[7][9]==’X’ )||(arr[1][1]==’X’ && arr[4][5]==’X’ && arr[7][9]==’X’ )||(arr[1][1]==’X’ && arr[4][5]==’X’ && arr[7][1]==’X’ ))
+    {
+        Print();
+         Printf(“Player one wins”);
+         Exit(0);
+    }
+     If((arr[1][1]==’O’ && arr[1][5]==’O’ && arr[1][9]==’O’ )||(arr[4][1]==’O’ && arr[4][5]==’O’ && arr[4][9]==’O’ )||(arr[7][1]==’O’ && arr[7][5]==’O’ && arr[7][9]==’O’ )||(arr[1][1]==’O’ && arr[4][1]==’O’ && arr[7][1]==’O’ )||(arr[1][5]==’O’ && arr[4][5]==’O’ && arr[7][5]==’O’ )||(arr[1][9]==’O’ && arr[4][9]==’O’ && arr[7][9]==’O’ )||(arr[1][1]==’O’ && arr[4][5]==’O’ && arr[7][9]==’O’ )||(arr[1][1]==’O’ && arr[4][5]==’O’ && arr[7][1]==’O’ ))
+    {
+        Print();
+        Printf(“Player two wins”);
+        Exit(0);
+    }
+    Check();
+}
+Void check()
+{
+ If(arr[1][1]!=’ ‘&&arr[1][5]!=’ ‘&&arr[1][9]!=’ ‘&&arr[4][1]!=’ ‘&&arr[4][5]!=’ ‘&&arr[4][9]!=’ ‘&&arr[7][1]!=’ ‘&&arr[7][5]!=’ ‘&&arr[7][9]!=’ ‘)
+ {
+     Print();
+     Printf(“\nNo one wins\n”);
+     Exit(0);
+}
+ Game();
+}
